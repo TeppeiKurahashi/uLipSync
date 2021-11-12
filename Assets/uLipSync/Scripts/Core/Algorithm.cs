@@ -5,10 +5,11 @@ using Unity.Burst;
 namespace uLipSync
 {
 
-[BurstCompile]
+[BurstCompile(DisableDirectCall = true)]
 public static class Algorithm
 {
-    [BurstCompile]
+    /*
+    [BurstCompile(DisableDirectCall = true)]
     public static float GetMaxValue(in NativeArray<float> array)
     {
         float max = 0f;
@@ -19,7 +20,7 @@ public static class Algorithm
         return max;
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static float GetMinValue(in NativeArray<float> array)
     {
         float min = 0f;
@@ -30,7 +31,7 @@ public static class Algorithm
         return min;
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static float GetRMSVolume(in NativeArray<float> array)
     {
         float average = 0f;
@@ -42,7 +43,7 @@ public static class Algorithm
         return math.sqrt(average / n);
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void CopyRingBuffer(in NativeArray<float> input, out NativeArray<float> output, int startSrcIndex)
     {
         output = new NativeArray<float>(input.Length, Allocator.Temp);
@@ -52,7 +53,7 @@ public static class Algorithm
         }
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void Normalize(ref NativeArray<float> array)
     {
         float max = GetMaxValue(array);
@@ -63,7 +64,7 @@ public static class Algorithm
         }
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void LowPassFilter(ref NativeArray<float> data, float sampleRate, float cutoff, float range)
     {
         cutoff /= sampleRate;
@@ -94,7 +95,7 @@ public static class Algorithm
         tmp.Dispose();
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void DownSample(in NativeArray<float> input, out NativeArray<float> output, int sampleRate, int targetSampleRate)
     {
         if (sampleRate <= targetSampleRate)
@@ -128,7 +129,7 @@ public static class Algorithm
         }
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void PreEmphasis(ref NativeArray<float> data, float p)
     {
         var tmp = new NativeArray<float>(data, Allocator.Temp);
@@ -139,7 +140,7 @@ public static class Algorithm
         tmp.Dispose();
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void HammingWindow(ref NativeArray<float> array)
     {
         int N = array.Length;
@@ -151,7 +152,7 @@ public static class Algorithm
         }
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void FFT(in NativeArray<float> data, out NativeArray<float> spectrum)
     {
         int N = data.Length;
@@ -177,7 +178,7 @@ public static class Algorithm
         spectrumIm.Dispose();
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     static void FFT(ref NativeArray<float> spectrumRe, ref NativeArray<float> spectrumIm, int N)
     {
         if (N < 2) return;
@@ -219,7 +220,7 @@ public static class Algorithm
         oddIm.Dispose();
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void MelFilterBank(
         in NativeArray<float> spectrum, 
         out NativeArray<float> melSpectrum,
@@ -258,19 +259,19 @@ public static class Algorithm
         }
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static float ToMel(float hz)
     {
         return 1127.010480f * math.log(hz / 700f + 1f);
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static float ToHz(float mel)
     {
         return 700f * (math.exp(mel / 1127.010480f) - 1f);
     }
 
-    [BurstCompile]
+    [BurstCompile(DisableDirectCall = true)]
     public static void DCT(
         in NativeArray<float> spectrum,
         out NativeArray<float> cepstrum)
@@ -289,6 +290,7 @@ public static class Algorithm
             cepstrum[i] = sum;
         }
     }
+    */
 }
 
 }
